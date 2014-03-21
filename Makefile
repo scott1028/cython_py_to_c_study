@@ -19,9 +19,8 @@ test: test.o
 	mkdir dist
 	$(LINKCC) -o dist/$@ $^ -L$(LIBDIR1) -L$(LIBDIR2) -l$(PYLIB) $(LIBS) $(SYSLIBS) $(LINKFORSHARED)
 	cp my_lib.py dist/
-
-# 測試 ./dist/test
-# 當然你也可以考慮把 my_lib.py 單獨 compiler 成 .pyd 再放進來。就完全看不到 Python Code 了。
+	@echo 測試： ./dist/test
+	@echo 備註：當然你也可以考慮把 my_lib.py 單獨 compiler 成 .pyd 再放進來。就完全看不到 Python Code 了。
 
 test.o: test.c
 	$(CC) -c $^ -I$(INCDIR) -I$(PLATINCDIR)
@@ -30,7 +29,7 @@ test.c: test.pyx
 	cython --embed test.pyx
 
 all: test
-	./dist/test
+	@dist/test
 
 clean:
 	@echo Cleaning Demos/embed
