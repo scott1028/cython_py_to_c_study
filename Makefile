@@ -15,12 +15,21 @@ LINKFORSHARED=$(shell $(PYTHON) -c "import distutils.sysconfig; print(distutils.
 LIBS=$(shell $(PYTHON) -c "import distutils.sysconfig; print(distutils.sysconfig.get_config_var('LIBS'))")
 SYSLIBS= $(shell $(PYTHON) -c "import distutils.sysconfig; print(distutils.sysconfig.get_config_var('SYSLIBS'))")
 
-test: test.o
+# all 就是 make 無帶任何參數的執行依據
+all: test.o
 	mkdir dist
-	$(LINKCC) -o dist/$@ $^ -L$(LIBDIR1) -L$(LIBDIR2) -l$(PYLIB) $(LIBS) $(SYSLIBS) $(LINKFORSHARED)
-	cp my_lib.py dist/
+	@echo =========Debug Value=========
+	@echo $@
+	@echo $^
+	@echo =========Debug Value=========
+	$(LINKCC) -o dist/test $^ -L$(LIBDIR1) -L$(LIBDIR2) -l$(PYLIB) $(LIBS) $(SYSLIBS) $(LINKFORSHARED)
+	@python setup.py build_ext --inplace
+	@cp my_lib.so dist/
 	@echo 測試： ./dist/test
 	@echo 備註：當然你也可以考慮把 my_lib.py 單獨 compiler 成 .pyd 再放進來。就完全看不到 Python Code 了。
+	@echo
+	@echo test execute program....
+	@dist/test
 
 test.o: test.c
 	$(CC) -c $^ -I$(INCDIR) -I$(PLATINCDIR)
@@ -28,13 +37,11 @@ test.o: test.c
 test.c: test.pyx
 	cython --embed test.pyx
 
-all: test
-	@dist/test
-
 clean:
 	@echo Cleaning Demos/embed
 	@rm -f *~ *.o *.so core core.* *.c test test.output
 	@rm -rf dist
+	@rm -rf build
 
 # GCC Build 範本
 # 	cython test.pyx --embed
