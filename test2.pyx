@@ -11,13 +11,16 @@ def run_for_test2(x):
 # 遞迴展開目錄
 def scan_dir(path):
     import glob
+    import os
     files = glob.glob(path+'/*')
     if len(files) == 0:
         return len(files)
     else:
         for i in files:
-            l = scan_dir(i)
-            print i
+            if os.path.isdir(i):
+                scan_dir(i)
+            else:
+                print i
 
 
         return len(files)
