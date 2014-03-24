@@ -5,12 +5,12 @@
 include "my_lib_plugin.pyx"
 
 def test2(url):
-	import urllib2
-	return urllib2.urlopen(url).read()
+    import urllib2
+    return urllib2.urlopen(url).read()
 
 def echo(msg):
-	print msg
-	return msg
+    print msg
+    return msg
 
 def call_plugin():
-	my_lib_plugin_A('plugin invoked!')
+    my_lib_plugin_A('plugin invoked!')
