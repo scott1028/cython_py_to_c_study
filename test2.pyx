@@ -18,11 +18,10 @@ def scan_dir(path):
     else:
         for i in files:
             if os.path.isdir(i):
+                print 'Dir ->\t'+i
                 scan_dir(i)
             else:
-                print i
-
-
+                print 'File->\t'+i
         return len(files)
 
 if __name__ == '__main__':
