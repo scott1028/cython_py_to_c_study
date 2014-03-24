@@ -1,6 +1,7 @@
 # coding:utf-8
 
 import my_lib
+import test2
 
 if __name__ == '__main__':
 	print 'hello world'
@@ -10,4 +11,3 @@ if __name__ == '__main__':
 		print my_lib.test('http://www.youtube.com')[0:100]
 	except Exception:
 		print 'no network!'
-

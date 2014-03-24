@@ -18,16 +18,20 @@ SYSLIBS= $(shell $(PYTHON) -c "import distutils.sysconfig; print(distutils.sysco
 # all 就是 make 無帶任何參數的執行依據
 all: test.o
 	mkdir dist
+	mkdir source_code
+	mkdir obj
 	@echo =========Debug Value=========
 	@echo $@
 	@echo $^
 	@echo =========Debug Value=========
 	$(LINKCC) -o dist/test $^ -L$(LIBDIR1) -L$(LIBDIR2) -l$(PYLIB) $(LIBS) $(SYSLIBS) $(LINKFORSHARED)
 	@python setup.py build_ext --inplace
-	@cp my_lib.so dist/
+	@mv *.so dist/
+	@mv *.c *.cpp source_code/
+	@mv *.o obj/
 	@echo 測試： ./dist/test
 	@echo 備註：當然你也可以考慮把 my_lib.py 單獨 compiler 成 .pyd 再放進來。就完全看不到 Python Code 了。
-	@echo
+	@echo 
 	@echo test execute program....
 	@dist/test
 
@@ -41,7 +45,9 @@ clean:
 	@echo Cleaning Demos/embed
 	@rm -f *~ *.o *.so core core.* *.c test test.output
 	@rm -rf dist
+	@rm -rf source_code
 	@rm -rf build
+	@rm -rf obj
 
 # GCC Build 範本
 # 	cython test.pyx --embed
