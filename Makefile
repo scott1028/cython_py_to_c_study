@@ -16,7 +16,8 @@ LINKFORSHARED=$(shell $(PYTHON) -c "import distutils.sysconfig; print(distutils.
 LIBS=$(shell $(PYTHON) -c "import distutils.sysconfig; print(distutils.sysconfig.get_config_var('LIBS'))")
 SYSLIBS= $(shell $(PYTHON) -c "import distutils.sysconfig; print(distutils.sysconfig.get_config_var('SYSLIBS'))")
 
-# ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future 
+# ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+# export export CFLAGS=-Qunused-arguments
 
 # all 就是 make 無帶任何參數的執行依據
 all: test.o

@@ -9,5 +9,6 @@ if __name__ == '__main__':
     try:
         print 'get url: http://www.youtube.com html file:'
         print my_lib.test('http://www.youtube.com')[0:100]
-    except Exception:
+    except Exception as e:
+    	print e
         print 'no network!'
