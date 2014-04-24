@@ -1,15 +1,21 @@
 # coding:utf-8
 
-import hello_cython
+import test_cy
 
-print hello_cython.echo()
+print test_cy.echo()
 
-print hello_cython.echo2()
+print test_cy.echo2()
 
-# print hello_cython.echo3()
+# print test_cy.echo3()
 
-print hello_cython.echo5()
+print test_cy.echo5()
 
-print hello_cython.ee
+print test_cy.ee
 
-print dir(hello_cython)
+print dir(test_cy)
+
+import pyximport; pyximport.install()
+import lib2	 # import 時後才編譯成 pyd
+
+import pdb; pdb.set_trace()
+
