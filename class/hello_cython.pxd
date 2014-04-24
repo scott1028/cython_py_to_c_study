@@ -9,7 +9,7 @@ cpdef inline echo5():
     print "echo in pxd with cpdef"
 
 cdef class A:
-    cpdef evaluate(self, double x)
+    pass
 
 # cdef inline echo7():
 #     print "echo in pyd with cpdef class"

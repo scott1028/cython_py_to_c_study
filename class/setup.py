@@ -6,3 +6,6 @@ setup(
 	name = 'cython-lab',
 	ext_modules = cythonize(['*.pyx']),
 )
+
+# Command:
+# 	python setup.py build_ext --inplace
