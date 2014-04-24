@@ -24,6 +24,9 @@ cdef test b
 
 cdef int i
 
+# only def, class can be define as cpdef, and invoke by python
+# so you can access any variable in cpdef method/class you want.
+# variable cant be def as cpdef, so you cant see it in python
 cpdef int j
 
 j = 100
