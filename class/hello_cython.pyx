@@ -47,6 +47,10 @@ def echo():
 	echo4()  # as the same file name xxx.pxd define echo4 function
 	print i
 
+cpdef int y = 999
+
+print y
+
 # print i
 
 # print 'hello world'
